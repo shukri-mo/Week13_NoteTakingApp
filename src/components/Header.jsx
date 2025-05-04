@@ -1,9 +1,13 @@
 import { Sticker as Sticky, Plus, List } from 'lucide-react';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const Header = () => {
   const { pathname } = useLocation();
-  
+  const[query,setQuery]=useState('')
+  const handleSubmit=(e)=>{
+e.preventDefault();
+  }
   return (
     <header className="bg-white shadow-sm">
       <div className="container mx-auto px-4 py-4">
@@ -12,7 +16,7 @@ const Header = () => {
             <Sticky size={24} />
             <span>Sticky Notes</span>
           </Link>
-          
+        
           <div className="flex gap-4">
             <Link 
               to="/" 
@@ -25,6 +29,7 @@ const Header = () => {
               <Plus size={18} />
               <span>Create</span>
             </Link>
+          
             
             <Link 
               to="/notes" 

@@ -3,12 +3,12 @@ import NoteCard from "../components/NoteCard";
 
 import { StickyNote, Trash2 } from "lucide-react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const ViewNotes = () => {
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const [query, setQuery] = useState("");
   const loadNotes = async () => {
     setLoading(true);
     try {
@@ -86,22 +86,47 @@ const ViewNotes = () => {
       </div>
     );
   }
-
+  const filteredNotes = notes.filter((note) =>
+    note.title.toLowerCase().includes(query.toLowerCase())
+  );
   return (
-    <div className="max-w-6xl mx-auto">
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-800 mb-2">Your Notes</h1>
-        <p className="text-gray-600">
-          {notes.length} {notes.length === 1 ? "note" : "notes"} stored
-        </p>
-      </div>
+    <>
+      <div className="max-w-6xl mx-auto">
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {notes.map((note) => (
-          <NoteCard key={note.id} note={note} onDelete={handleDelete} />
-        ))}
+        {/* SEARCH BOX  */}
+
+        <input
+          type="text"
+          placeholder="Search Notes"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          className="w-full outline-none border-2 rounded-lg p-2"
+        />
+        <>
+          <div className="mb-8">
+            <h1 className="text-2xl font-bold text-gray-800 mb-2">
+              Your Notes
+            </h1>
+            <p className="text-gray-600">
+              {notes.length} {notes.length === 1 ? "note" : "notes"} stored
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredNotes.length > 0 ? (
+              filteredNotes.map((note) => (
+                <NoteCard key={note.id} note={note} onDelete={handleDelete} />
+              ))
+            ) : (
+      //If there is no note same as the search query display this parapgraph
+              <p className="text-black text-center pt-4">
+                No result match for your search please try again
+              </p>
+            )}
+          </div>
+        </>
       </div>
-    </div>
+    </>
   );
 };
 

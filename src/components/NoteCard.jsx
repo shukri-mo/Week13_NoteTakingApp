@@ -2,7 +2,6 @@ import { Trash2 } from "lucide-react";
 
 const NoteCard = ({ note, onDelete }) => {
   const { id, title, content } = note;
-
   return (
     <div
       className="relative"
@@ -44,7 +43,9 @@ const NoteCard = ({ note, onDelete }) => {
             className="text-base whitespace-pre-line"
             style={{ fontWeight: 300 }}
           >
-            {content}
+{/* This returns the content without the html elements */}
+<div dangerouslySetInnerHTML={{ __html: content }} /> 
+            {/* {content} */}
           </p>
         </div>
       </div>
