@@ -1,4 +1,6 @@
 import { Trash2 } from "lucide-react";
+import { Edit } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const NoteCard = ({ note, onDelete }) => {
   const { id, title, content } = note;
@@ -33,18 +35,23 @@ const NoteCard = ({ note, onDelete }) => {
           <button
             onClick={() => onDelete(id)}
             aria-label="Delete note"
-            className="text-gray-500 hover:text-red-500 p-1 rounded-full hover:bg-red-50 transition-colors"
+            className="text-gray-500 hover:text-red-500  rounded-full hover:bg-red-50 transition-colors"
           >
             <Trash2 size={18} />
           </button>
+          <Link to={`/notes/${note.id}`}>
+            <button className="text-gray-500 hover:text-green-500  rounded-full hover:bg-red-50 transition-colors">
+              <Edit size={18} />
+            </button>
+          </Link>
         </div>
         <div className="flex-grow mb-2">
           <p
             className="text-base whitespace-pre-line"
             style={{ fontWeight: 300 }}
           >
-{/* This returns the content without the html elements */}
-<div dangerouslySetInnerHTML={{ __html: content }} /> 
+            {/* This returns the content without the html elements */}
+            <div dangerouslySetInnerHTML={{ __html: content }} />
             {/* {content} */}
           </p>
         </div>

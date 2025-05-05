@@ -87,8 +87,8 @@ const ViewNotes = () => {
     );
   }
   const filteredNotes = notes.filter((note) =>
-    note.title.toLowerCase().includes(query.toLowerCase())
-  );
+    note.title.toLowerCase().includes(query.toLowerCase()) || note.content.toLowerCase().includes(query.toLowerCase())
+);
   return (
     <>
       <div className="max-w-6xl mx-auto">

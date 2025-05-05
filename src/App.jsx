@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import CreateNote from './pages/CreateNote';
 import ViewNotes from './pages/ViewNotes';
+import EditNoteForm from './components/EditNoteForm';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Routes>
             <Route path="/" element={<CreateNote />} />
             <Route path="/notes" element={<ViewNotes />} />
+            <Route path="/notes/:id" element={<EditNoteForm />} />
           </Routes>
         </main>
       </div>
